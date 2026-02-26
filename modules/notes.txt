@@ -12,6 +12,8 @@ D:\Workspace\dotnet-webapi-zero-to-hero-course\modules\02-database-management-wi
 
 	docker compose -p postgresql up -d
 
+	docker compose -p postgresql down -v
+
 2. Restore NuGet Packages
 
 	dotnet restore
@@ -20,21 +22,42 @@ D:\Workspace\dotnet-webapi-zero-to-hero-course\modules\02-database-management-wi
 
 	dotnet run --project MovieApi.Api
 
-4. pgAdmin is avaliable at http://localhost:5050 (admin@admin.com, admin)
+4. pgAdmin is available at http://localhost:5050
 
-	-- Offset pagination — gets slower as offset grows
-	SELECT *
-	FROM app."Movies"
-	WHERE "Title" ILIKE '%action%' OR "Genre" ILIKE '%action%'
-	ORDER BY "Rating" DESC, "Title" ASC, "Id" ASC
-	LIMIT 5 OFFSET 0;  -- page 1, pageSize 5
+	Login:
+
+		Email Address / Username:		admin@admin.com
+		Password:						dbadminsecret
+
+	Servers:
+
+		Register > Server...
+
+			General
+				Name: PostgresLocal
+
+			Connection
+				Host name/address: postgres
+				Port: 5432
+				Maintenance database: dotnetHero
+				Username: dbuser
+				Password: dbusersecret
+
+		PostgresLocal > Databases > dotnetHero > Query Tool
+
+			-- Offset pagination — gets slower as offset grows
+			SELECT *
+			FROM app."Movies"
+			WHERE "Title" ILIKE '%action%' OR "Genre" ILIKE '%action%'
+			ORDER BY "Rating" DESC, "Title" ASC, "Id" ASC
+			LIMIT 5 OFFSET 0;  -- page 1, pageSize 5
 	
-	-- Keyset pagination — constant speed regardless of position
-	SELECT *
-	FROM app."Movies"
-	WHERE "Created" > '2026-01-01T00:00:00Z'
-	ORDER BY "Created" ASC, "Id" ASC
-	LIMIT 10;
+			-- Keyset pagination — constant speed regardless of position
+			SELECT *
+			FROM app."Movies"
+			WHERE "Created" > '2026-01-01T00:00:00Z'
+			ORDER BY "Created" ASC, "Id" ASC
+			LIMIT 10;
 
 5. Scalar UI for testing API is available at https://localhost:62635/scalar/v1
 
