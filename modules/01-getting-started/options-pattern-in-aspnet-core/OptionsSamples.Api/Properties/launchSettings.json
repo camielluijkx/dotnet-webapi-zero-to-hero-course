@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "OptionsSamples.Api": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "scalar",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:53301;http://localhost:53302"
+    }
+  }
+}
